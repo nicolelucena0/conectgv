@@ -1,6 +1,22 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { auth, db } from "../firebaseConfig";
 
 export default function Index() {
+
+
+async function cadastrarUsuario(email: string, senha: string) {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+  console.log("Usuário criado:", userCredential.user.uid);
+}
+
+async function salvarDados() {
+  await addDoc(collection(db, "usuarios"), { nome: "Nicole", ativo: true });
+  console.log("Usuário salvo!");
+}
+
+
     return (
         <View style={styles.container}>
             <Image
