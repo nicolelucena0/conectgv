@@ -1,22 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { auth, db } from "../firebaseConfig";
 
 export default function Index() {
-
-
-async function cadastrarUsuario(email: string, senha: string) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-  console.log("Usuário criado:", userCredential.user.uid);
-}
-
-async function salvarDados() {
-  await addDoc(collection(db, "usuarios"), { nome: "Nicole", ativo: true });
-  console.log("Usuário salvo!");
-}
-
-
     return (
         <View style={styles.container}>
             <Image
@@ -29,13 +14,18 @@ async function salvarDados() {
                 Conectando quem pode doar com quem precisa. 
             </Text>
 
+            <Link href="/login" replace asChild>
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Fazer uma Doação</Text>
+                <Text style={styles.buttonText}>Quero Doar</Text>
             </TouchableOpacity>
+            </Link>
 
+            <Link href="/login" replace asChild>
             <TouchableOpacity style={styles.buttonSecondary}>
-                <Text style={styles.buttonTextSecondary}>Solicitar Ajuda</Text>
+                <Text style={styles.buttonTextSecondary}>Receber Ajuda</Text>
             </TouchableOpacity>
+            </Link>
+            
 
             <Text style={styles.footer}>
                 © 2025 Projeto Solidário
@@ -88,7 +78,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         borderRadius: 8,
         marginBottom: 40,
-    },
+    },    
     buttonTextSecondary: {
         color: "#2e7d32",
         fontSize: 16,
