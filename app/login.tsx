@@ -1,4 +1,5 @@
 import { auth } from "@/firebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
@@ -15,8 +16,11 @@ export default function Login() {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, senha);
-      router.replace("/success");
+      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      if (userCredential.user) {
+        await AsyncStorage.setItem("user-token", "dummy-token-123");
+        router.replace("/doar");
+      }
     } catch (error: any) {
       Alert.alert("Erro ao entrar", error.message);
     }

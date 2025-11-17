@@ -26,6 +26,7 @@ export default function Index() {
             </TouchableOpacity>
             </Link>
             
+            
 
             <Text style={styles.footer}>
                 © 2025 Projeto Solidário
