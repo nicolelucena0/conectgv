@@ -66,6 +66,8 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 30,
         borderRadius: 8,
+        width: '100%',
+        alignItems: 'center',
         marginBottom: 15,
     },
     buttonText: {
@@ -78,6 +80,8 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 30,
         borderRadius: 8,
+        width: '100%',
+        alignItems: 'center',
         marginBottom: 40,
     },    
     buttonTextSecondary: {

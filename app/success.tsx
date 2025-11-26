@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
-  button: { backgroundColor: "#e74c3c", padding: 15, borderRadius: 8 },
+  button: {
+    backgroundColor: "#e74c3c",
+    padding: 15,
+    borderRadius: 8,
+    width: "100%",
+    alignItems: "center",
+  },
   buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
 });

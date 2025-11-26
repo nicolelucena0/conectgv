@@ -70,12 +70,13 @@ export default function VerDoacoes() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Minhas Doações Registradas</Text>
-      <FlatList
-        data={donations}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={donations}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Text style={styles.buttonText}>Voltar</Text>
       </TouchableOpacity>
@@ -84,14 +85,48 @@ export default function VerDoacoes() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#f5f5f5' },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#2e7d32', marginBottom: 20, textAlign: 'center', marginTop: 30 },
-  donationCard: { backgroundColor: '#fff', borderRadius: 10, padding: 15, marginBottom: 15, borderWidth: 1, borderColor: '#ddd' },
-  deliveredCard: { backgroundColor: '#e8f5e9' },
-  donationText: { fontSize: 16, color: '#333', marginBottom: 5 },
-  bold: { fontWeight: 'bold' },
-  confirmButton: { backgroundColor: '#4CAF50', paddingVertical: 10, borderRadius: 8, alignItems: 'center', marginTop: 10 },
-  disabledButton: { backgroundColor: '#aaa' },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
-  backButton: { backgroundColor: '#f44336', paddingVertical: 12, borderRadius: 8, alignItems: 'center', marginTop: 10 },
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    padding: 20,
+  },
+  listContainer: {
+    flex: 1, // Garante que a lista ocupe o espaço disponível
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2e7d32",
+    marginBottom: 20,
+    textAlign: "center",
+    marginTop: 30,
+  },
+  donationCard: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#ddd",
+  },
+  deliveredCard: { backgroundColor: "#e8f5e9" },
+  donationText: { fontSize: 16, color: "#333", marginBottom: 5 },
+  bold: { fontWeight: "bold" },
+  confirmButton: {
+    backgroundColor: "#4CAF50",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  disabledButton: { backgroundColor: "#aaa" },
+  buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
+  backButton: {
+    backgroundColor: "#f44336",
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 10,
+    width: "100%",
+  },
 });
