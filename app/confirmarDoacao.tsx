@@ -3,10 +3,10 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function ConfirmarDoacao() {
-  const { alimento, kilos, paraQuem, local } = useLocalSearchParams<{
+  const { alimento, kilos, nomeDoador, local } = useLocalSearchParams<{
     alimento: string;
     kilos: string;
-    paraQuem: string;
+    nomeDoador: string;
     local: string;
   }>();
 
@@ -33,7 +33,7 @@ export default function ConfirmarDoacao() {
           <Text style={styles.bold}>Quantidade:</Text> {kilos} Kg
         </Text>
         <Text style={styles.detailText}>
-          <Text style={styles.bold}>Destino:</Text> {paraQuem}
+          <Text style={styles.bold}>Doador:</Text> {nomeDoador}
         </Text>
         <Text style={styles.detailText}>
           <Text style={styles.bold}>Local de Retirada:</Text> {local}

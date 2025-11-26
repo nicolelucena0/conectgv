@@ -13,8 +13,8 @@ import {
 export default function Doar() {
   const [alimento, setAlimento] = useState("");
   const [kilos, setKilos] = useState("");
-  const [paraQuem, setParaQuem] = useState("");
   const [local, setLocal] = useState("");
+  const [nomeDoador, setNomeDoador] = useState("");
   
   const handleLogout = async () => {
     await AsyncStorage.removeItem("user-token");
@@ -22,7 +22,7 @@ export default function Doar() {
   };
   
   const handleDoar = () => {
-    if (!alimento || !kilos || !paraQuem || !local) {
+    if (!alimento || !kilos || !nomeDoador || !local) {
       Alert.alert(
         "Atenção",
         "Por favor, preencha todos os campos para realizar a doação."
@@ -32,14 +32,14 @@ export default function Doar() {
   
     router.push({
       pathname: "/confirmarDoacao",
-      params: { alimento, kilos, paraQuem, local },
+      params: { alimento, kilos, nomeDoador, local },
     });
 
     // Limpa os campos após a doação
     setAlimento("");
     setKilos("");
-    setParaQuem("");
     setLocal("");
+    setNomeDoador("");
   };
   
   return (
@@ -63,9 +63,9 @@ export default function Doar() {
   
       <TextInput
         style={styles.input}
-        placeholder="Para quem se destina?"
-        value={paraQuem}
-        onChangeText={setParaQuem}
+        placeholder="Seu nome (Doador)"
+        value={nomeDoador}
+        onChangeText={setNomeDoador}
       />
   
       <TextInput
