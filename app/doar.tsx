@@ -30,12 +30,11 @@ export default function Doar() {
       return;
     }
   
-    // Aqui você pode adicionar a lógica para enviar os dados da doação
-    Alert.alert(
-      "Doação Registrada!",
-      "Sua doação foi registrada com sucesso. Obrigado por ajudar!"
-    );
-  
+    router.push({
+      pathname: "/confirmarDoacao",
+      params: { alimento, kilos, paraQuem, local },
+    });
+
     // Limpa os campos após a doação
     setAlimento("");
     setKilos("");
