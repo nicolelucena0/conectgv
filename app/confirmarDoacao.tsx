@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function ConfirmarDoacao() {
   const { alimento, kilos, paraQuem, local } = useLocalSearchParams<{
@@ -13,16 +13,8 @@ export default function ConfirmarDoacao() {
   const handleConfirm = () => {
     // Aqui você adicionaria a lógica para salvar a doação no banco de dados.
     // Por enquanto, apenas exibimos um alerta de sucesso.
-    Alert.alert(
-      "Doação Confirmada!",
-      "Sua doação foi registrada com sucesso. Obrigado por ajudar!",
-      [
-        {
-          text: "OK",
-          onPress: () => router.replace("/doar"), // Volta para a tela de doação e limpa o histórico
-        },
-      ]
-    );
+    // Após salvar, navega para a tela de sucesso.
+    router.replace("/doacaoConfirmada");
   };
 
   const handleEdit = () => {
