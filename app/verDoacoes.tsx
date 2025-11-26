@@ -66,7 +66,7 @@ export default function VerDoacoes() {
             const updatedDonations = donations.map(d =>
                 d.id === id ? { ...d, status: 'Entregue' } : d
             );
-            setDonations(updatedDonations);
+
             AsyncStorage.setItem('donations', JSON.stringify(updatedDonations))
               .then(() => {
                 Alert.alert("Obrigado!", "Doação confirmada com sucesso.");
