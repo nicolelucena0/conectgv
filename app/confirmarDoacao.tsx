@@ -1,6 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function ConfirmarDoacao() {
   const { alimento, kilos, nomeDoador, local } = useLocalSearchParams<{
@@ -10,11 +11,28 @@ export default function ConfirmarDoacao() {
     local: string;
   }>();
 
-  const handleConfirm = () => {
-    // Aqui você adicionaria a lógica para salvar a doação no banco de dados.
-    // Por enquanto, apenas exibimos um alerta de sucesso.
-    // Após salvar, navega para a tela de sucesso.
-    router.replace("/doacaoConfirmada");
+  const handleConfirm = async () => {
+    try {
+      const storedDonations = await AsyncStorage.getItem("donations");
+      const donations = storedDonations ? JSON.parse(storedDonations) : [];
+
+      const newDonation = {
+        id: Date.now().toString(),
+        alimento,
+        kilos,
+        paraQuem: nomeDoador, // Usando nomeDoador como destino temporário
+        local,
+        status: "Pendente",
+      };
+
+      const updatedDonations = [...donations, newDonation];
+      await AsyncStorage.setItem("donations", JSON.stringify(updatedDonations));
+
+      router.replace("/doacaoConfirmada");
+    } catch (error) {
+      console.error("Erro ao salvar doação:", error);
+      Alert.alert("Erro", "Não foi possível salvar a doação.");
+    }
   };
 
   const handleEdit = () => {
