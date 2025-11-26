@@ -1,6 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useState } from 'react';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
 import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // Dados de exemplo. Em uma aplicação real, viriam de um banco de dados.
@@ -23,30 +22,7 @@ const initialDonations: Donation[] = [
 ];
 
 export default function VerDoacoes() {
-  const [donations, setDonations] = useState<Donation[]>([]);
-
-  const loadDonations = useCallback(async () => {
-    try {
-      const storedDonations = await AsyncStorage.getItem('donations');
-      // Se não houver doações salvas, carrega os dados iniciais e os salva.
-      if (storedDonations === null) {
-        await AsyncStorage.setItem('donations', JSON.stringify(initialDonations));
-        setDonations(initialDonations);
-      } else {
-        setDonations(JSON.parse(storedDonations));
-      }
-    } catch (error) {
-      console.error("Erro ao carregar doações:", error);
-      // Em caso de erro, carrega os dados iniciais como fallback
-      setDonations(initialDonations);
-    }
-  }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      loadDonations();
-    }, [loadDonations])
-  );
+  const [donations, setDonations] = useState<Donation[]>(initialDonations);
 
   const handleConfirmDonation = (id: string) => {
     const donation = donations.find(d => d.id === id);
@@ -63,15 +39,12 @@ export default function VerDoacoes() {
         {
           text: "Confirmar",
           onPress: () => {
-            const updatedDonations = donations.map(d =>
+            setDonations(prevDonations =>
+              prevDonations.map(d =>
                 d.id === id ? { ...d, status: 'Entregue' } : d
+              )
             );
-
-            AsyncStorage.setItem('donations', JSON.stringify(updatedDonations))
-              .then(() => {
-                Alert.alert("Obrigado!", "Doação confirmada com sucesso.");
-              })
-              .catch(error => console.error("Erro ao salvar status da doação:", error));
+            Alert.alert("Obrigado!", "Doação confirmada com sucesso.");
           },
         },
       ]

@@ -4,7 +4,7 @@ import React from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function ConfirmarDoacao() {
-  const { alimento, kilos, nomeDoador, local } = useLocalSearchParams<{
+  const { alimento, kilos, nomeDoador, local } = useLocalSearchParams< {
     alimento: string;
     kilos: string;
     nomeDoador: string;
@@ -20,7 +20,7 @@ export default function ConfirmarDoacao() {
         id: Date.now().toString(),
         alimento,
         kilos,
-        paraQuem: nomeDoador, // Usando nomeDoador como destino temporário
+        paraQuem: "A definir", // O formulário não tem este campo, então usamos um valor padrão
         local,
         status: "Pendente",
       };

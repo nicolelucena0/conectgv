@@ -34,12 +34,6 @@ export default function Doar() {
       pathname: "/confirmarDoacao",
       params: { alimento, kilos, nomeDoador, local },
     });
-
-    // Limpa os campos após a doação
-    setAlimento("");
-    setKilos("");
-    setLocal("");
-    setNomeDoador("");
   };
   
   return (
